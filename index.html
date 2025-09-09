@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Candidature Staff — Yuki</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background: url("https://images.steamusercontent.com/ugc/2006971200363549825/7CDE1FABC83501A22A56DD9D9C8233060DE63EE2/") no-repeat center center fixed;
+      background-size: cover;
+      color: #f1f1f1;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .container {
+      background: rgba(15, 20, 35, 0.9);
+      padding: 28px;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 880px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+    }
+    h1 { margin: 0; font-size: 28px; font-weight: 700; }
+    p.lead { margin: 4px 0 0 0; font-size: 14px; color: #aaa; }
+    .tabs { display: flex; gap: 10px; margin: 18px 0; }
+    .tab {
+      padding: 10px 16px; border-radius: 10px; cursor: pointer;
+      background: rgba(255,255,255,0.05); border: 1px solid transparent;
+      color: #bbb; font-weight: 600; transition: all 0.2s;
+    }
+    .tab.active { background: linear-gradient(90deg,#7c3aed,#4f46e5); color: white; }
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .full { grid-column: 1 / -1; }
+    label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #ddd; }
+    input, textarea {
+      width: 100%; padding: 12px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05); color: #fff; font-size: 15px;
+    }
+    input::placeholder, textarea::placeholder { color: #aaa; font-size: 14px; }
+    input:focus, textarea:focus {
+      outline: none; border-color: #7c3aed; background: rgba(124,58,237,0.08);
+    }
+    textarea { min-height: 100px; resize: vertical; }
+    button {
+      grid-column: 1 / -1; background: #7c3aed; border: none;
+      padding: 14px; border-radius: 12px; color: white;
+      font-weight: 700; cursor: pointer; font-size: 16px;
+      transition: background 0.2s;
+    }
+    button:hover { background: #6d28d9; }
+    .confirmation {
+      grid-column: 1 / -1; display: none; margin-top: 12px; padding: 12px;
+      border-radius: 10px; background: rgba(16,185,129,0.15);
+      color: #34d399; font-weight: 600; text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="https://cdn.discordapp.com/attachments/1415013853946712134/1415017528043896873/image.png?ex=68c1ad44&is=68c05bc4&hm=96eec00c66674019d2a2fcb92ea36b73f0196f3024c1f2081dc7c3945167b02f&" alt="Logo Yuki">
+      <div>
+        <h1>Candidature Staff — Yuki</h1>
+        <p class="lead">Formulaire pour postuler en tant que Modérateur Discord ou TikTok</p>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <button class="tab active" data-target="discord">Modérateur Discord</button>
+      <button class="tab" data-target="tiktok">Modérateur TikTok</button>
+    </div>
+
+    <form id="applicationForm">
+      <div>
+        <label>Nom complet / Pseudo</label>
+        <input type="text" name="name" placeholder="Ex. Alex | Yuki#1234" required />
+      </div>
+      <div>
+        <label>Âge</label>
+        <input type="number" name="age" min="13" placeholder="Ex. 18" required />
+      </div>
+
+      <div>
+        <label>Identifiant Discord</label>
+        <input type="text" name="discord" placeholder="Ex. MonPseudo#1234" />
+      </div>
+      <div>
+        <label>Pseudo TikTok</label>
+        <input type="text" name="tiktok" placeholder="Ex. @MonPseudoTikTok" />
+      </div>
+
+      <div class="full">
+        <label>Date</label>
+        <input type="text" name="date" id="dateField" readonly />
+      </div>
+
+      <div class="full">
+        <label>Présentation personnelle</label>
+        <textarea name="presentation" placeholder="Ex. Je m’appelle Alex, j’ai 18 ans et je suis passionné par la modération et l’animation de communautés."></textarea>
+      </div>
+
+      <div class="full">
+        <label>Motivations</label>
+        <textarea name="motivations" placeholder="Ex. Je souhaite aider la communauté à rester active, respectueuse et accueillante."></textarea>
+      </div>
+
+      <div>
+        <label>Expériences & compétences</label>
+        <textarea name="experiences" placeholder="Ex. Modérateur sur un serveur Discord 500 membres, utilisation de MEE6/Dyno, gestion des conflits."></textarea>
+      </div>
+      <div>
+        <label>Ce que tu apportes</label>
+        <textarea name="apports" placeholder="Ex. Calme, impartialité, organisation et motivation."></textarea>
+      </div>
+
+      <button type="submit">Envoyer</button>
+      <div class="confirmation" id="confirmation">✅ Votre candidature a bien été envoyée !</div>
+    </form>
+  </div>
+
+  <script>
+    const WEBHOOK_URL = "https://discord.com/api/webhooks/1415060484477948025/aPTcJzKMUFyYUZ4TJkY4nfGPbjKEeTT8kvYHcv-jnQ6MIwBlCkSHR8KSf2If_dG8WvL9";
+
+    // Tabs
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', e => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+        const discordInput = document.querySelector('input[name=discord]');
+        const tiktokInput = document.querySelector('input[name=tiktok]');
+        if (btn.dataset.target === "discord") {
+          discordInput.required = true; tiktokInput.required = false;
+        } else {
+          discordInput.required = false; tiktokInput.required = true;
+        }
+      });
+    });
+
+    // Date auto
+    const dateField = document.getElementById("dateField");
+    dateField.value = new Date().toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" });
+
+    // Discord embed
+    function buildMessage(data) {
+      return {
+        username: "Candidature Yuki",
+        embeds: [{
+          title: `📋 Candidature — ${data.role}`,
+          color: data.role === "Modérateur Discord" ? 0x5865F2 : 0xFF0050,
+          thumbnail: { url: "https://cdn.discordapp.com/attachments/1415013853946712134/1415017528043896873/image.png?ex=68c1ad44&is=68c05bc4&hm=96eec00c66674019d2a2fcb92ea36b73f0196f3024c1f2081dc7c3945167b02f&" }, // logo/image
+          fields: [
+            { name: "👤 Nom / Pseudo", value: data.name || "-", inline: true },
+            { name: "🎂 Âge", value: data.age || "-", inline: true },
+            { name: "💻 Identifiant Discord", value: data.discord || "-", inline: true },
+            { name: "📱 TikTok", value: data.tiktok || "-", inline: true },
+            { name: "📅 Date", value: data.date || "-", inline: true },
+            { name: "📝 Présentation", value: data.presentation || "-" },
+            { name: "🎯 Motivations", value: data.motivations || "-" },
+            { name: "⚡ Expériences", value: data.experiences || "-" },
+            { name: "⭐ Apports", value: data.apports || "-" }
+          ],
+          footer: { text: "Formulaire de candidature Yuki" }
+        }]
+      }
+    }
+
+    const form = document.getElementById("applicationForm");
+    const confirmation = document.getElementById("confirmation");
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const data = {
+        role: document.querySelector(".tab.active").dataset.target === "discord" ? "Modérateur Discord" : "Modérateur TikTok",
+        name: fd.get("name"),
+        age: fd.get("age"),
+        discord: fd.get("discord"),
+        tiktok: fd.get("tiktok"),
+        date: fd.get("date"),
+        presentation: fd.get("presentation"),
+        motivations: fd.get("motivations"),
+        experiences: fd.get("experiences"),
+        apports: fd.get("apports")
+      };
+      try {
+        await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(buildMessage(data))
+        });
+        confirmation.style.display = "block";
+        form.reset();
+        dateField.value = new Date().toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" });
+      } catch (err) {
+        alert("❌ Erreur lors de l'envoi. Vérifie ton webhook.");
+      }
+    });
+  </script>
+</body>
+</html>
