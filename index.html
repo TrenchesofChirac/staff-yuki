@@ -22,7 +22,7 @@
       padding: 28px;
       border-radius: 16px;
       width: 100%;
-      max-width: 880px;
+      max-width: 700px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.6);
     }
     header {
@@ -45,8 +45,7 @@
       color: #bbb; font-weight: 600; transition: all 0.2s;
     }
     .tab.active { background: linear-gradient(90deg,#7c3aed,#4f46e5); color: white; }
-    form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .full { grid-column: 1 / -1; }
+    form { display: flex; flex-direction: column; gap: 16px; }
     label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #ddd; }
     input, textarea {
       width: 100%; padding: 12px; border-radius: 10px;
@@ -59,14 +58,14 @@
     }
     textarea { min-height: 100px; resize: vertical; }
     button {
-      grid-column: 1 / -1; background: #7c3aed; border: none;
+      background: #7c3aed; border: none;
       padding: 14px; border-radius: 12px; color: white;
       font-weight: 700; cursor: pointer; font-size: 16px;
       transition: background 0.2s;
     }
     button:hover { background: #6d28d9; }
     .confirmation {
-      grid-column: 1 / -1; display: none; margin-top: 12px; padding: 12px;
+      display: none; margin-top: 12px; padding: 12px;
       border-radius: 10px; background: rgba(16,185,129,0.15);
       color: #34d399; font-weight: 600; text-align: center;
     }
@@ -75,7 +74,7 @@
 <body>
   <div class="container">
     <header>
-      <img src="https://cdn.discordapp.com/attachments/1415013853946712134/1415017528043896873/image.png?ex=68c1ad44&is=68c05bc4&hm=96eec00c66674019d2a2fcb92ea36b73f0196f3024c1f2081dc7c3945167b02f&" alt="Logo Yuki">
+      <img src="https://media.discordapp.net/attachments/1415013853946712134/1415017528043896873/image.png?ex=68c2fec4&is=68c1ad44&hm=f411d63bc123a48ae6d863f46c02b83003fae21d7fa20a8e2c1d26608f44f71e&=&format=webp&quality=lossless" alt="Logo Yuki">
       <div>
         <h1>Candidature Staff — Yuki</h1>
         <p class="lead">Formulaire pour postuler en tant que Modérateur Discord ou TikTok</p>
@@ -90,13 +89,12 @@
     <form id="applicationForm">
       <div>
         <label>Nom complet / Pseudo</label>
-        <input type="text" name="name" placeholder="Ex. Alex | Yuki#1234" required />
+        <input type="text" name="name" placeholder="Ex. Yuki#1234" required />
       </div>
       <div>
         <label>Âge</label>
         <input type="number" name="age" min="13" placeholder="Ex. 18" required />
       </div>
-
       <div>
         <label>Identifiant Discord</label>
         <input type="text" name="discord" placeholder="Ex. MonPseudo#1234" />
@@ -105,22 +103,18 @@
         <label>Pseudo TikTok</label>
         <input type="text" name="tiktok" placeholder="Ex. @MonPseudoTikTok" />
       </div>
-
-      <div class="full">
+      <div>
         <label>Date</label>
         <input type="text" name="date" id="dateField" readonly />
       </div>
-
-      <div class="full">
+      <div>
         <label>Présentation personnelle</label>
         <textarea name="presentation" placeholder="Ex. Je m’appelle Alex, j’ai 18 ans et je suis passionné par la modération et l’animation de communautés."></textarea>
       </div>
-
-      <div class="full">
+      <div>
         <label>Motivations</label>
         <textarea name="motivations" placeholder="Ex. Je souhaite aider la communauté à rester active, respectueuse et accueillante."></textarea>
       </div>
-
       <div>
         <label>Expériences & compétences</label>
         <textarea name="experiences" placeholder="Ex. Modérateur sur un serveur Discord 500 membres, utilisation de MEE6/Dyno, gestion des conflits."></textarea>
@@ -164,7 +158,7 @@
         embeds: [{
           title: `📋 Candidature — ${data.role}`,
           color: data.role === "Modérateur Discord" ? 0x5865F2 : 0xFF0050,
-          thumbnail: { url: "https://cdn.discordapp.com/attachments/1415013853946712134/1415017528043896873/image.png?ex=68c1ad44&is=68c05bc4&hm=96eec00c66674019d2a2fcb92ea36b73f0196f3024c1f2081dc7c3945167b02f&" }, // logo/image
+          thumbnail: { url: "https://cdn.discordapp.com/attachments/1415013853946712134/1415017528043896873/image.png" },
           fields: [
             { name: "👤 Nom / Pseudo", value: data.name || "-", inline: true },
             { name: "🎂 Âge", value: data.age || "-", inline: true },
